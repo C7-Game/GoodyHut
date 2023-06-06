@@ -12,12 +12,7 @@ to force steam to download civ 3 on mac or linux systems.
 import sys
 from pathlib import Path
 
-def get_os():
-    if sys.platform.startswith('linux'):
-        return 'linux'
-    elif sys.platform.startswith('darwin'):
-        return 'mac'
-    raise Exception(f'{sys.platform} is not supported')
+from civ3_utils import get_os
 
 def create_manifest_content(id, folder):
     return f'''"AppState"
