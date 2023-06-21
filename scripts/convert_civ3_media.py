@@ -5,6 +5,7 @@ from os import makedirs
 from multiprocessing import cpu_count
 from multiprocessing.pool import ThreadPool
 from functools import partial
+from itertools import chain
 
 from civ3_utils import get_civ3_path
 
@@ -12,7 +13,8 @@ from civ3_utils import get_civ3_path
 # given relative glob (ie. 'terrain/*.pcx').
 def glob_art(glob: str) -> Generator[Path, None, None]:
     art = get_civ3_path().joinpath('Art')
-    return art.glob(glob)
+    conquests_art = get_civ3_path().joinpath('Conquests/Art')
+    return chain(art.glob(glob), conquests_art.glob(glob))
 
 def is_pixel_magenta(tpl: tuple[int]) -> bool:
     return tpl[0] == 255 and tpl[1] == 0 and tpl[2] == 255
